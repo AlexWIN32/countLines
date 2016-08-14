@@ -23,7 +23,7 @@ void Parse(const std::wstring &Path, std::vector<std::wstring> &Files, std::vect
         if(name == L"." || name == L"..")
             continue;
 
-        DWORD attrs = GetFileAttributesW(name.c_str());
+        DWORD attrs = GetFileAttributesW((Path + L"\\" + name).c_str());
         if(attrs == INVALID_FILE_ATTRIBUTES)
             throw IOException(L"cant get attributes for " + name);
 
