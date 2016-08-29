@@ -34,7 +34,7 @@ int32_t main(int32_t argc, char *argv[ ])
             std::cout << "usage: countLines [-e regexp] [-d directory]" << std::endl;
             std::cout << " -e: file regular expression pattern" << std::endl;
             std::cout << " -d: root processing directory" << std::endl;
-            std::cout << " -t: text file dir. This text will placed at the beginning of each" << std::endl;
+            std::cout << " -t: text file dir. This text will be placed at the beginning of each" << std::endl;
             std::cout << "     file that matches regular expression" << std::endl;
         }
 
