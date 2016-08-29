@@ -21,7 +21,7 @@ void Counter::Process()
 
 void Counter::ProcessFile(const std::wstring &Path)
 {
-    std::wcout << L"processing " << Path << "... ";
+    std::wcout << L"processing " << Path << L"... ";
 
     int32_t linesInFile = 0;
 
@@ -31,7 +31,7 @@ void Counter::ProcessFile(const std::wstring &Path)
     while (std::getline(file, line))
         linesInFile++;
 
-    std::wcout << linesInFile << " lines" << std::endl;
+    std::wcout << linesInFile << L" lines." << std::endl;
 
     linesCnt += linesInFile;
 }
