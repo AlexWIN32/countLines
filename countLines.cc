@@ -26,7 +26,7 @@ int32_t main(int32_t argc, char *argv[ ])
             regex = converter.from_bytes(optarg);
         else if(c == 'd')
             dir = converter.from_bytes(optarg);
-        else if(c == 'd' || c == 'h'){
+        else if(c == '?' || c == 'h'){
             std::cout << "usage: countLines [-e regexp] [-d directory]" << std::endl;
             std::cout << " -e: file regular expression pattern" << std::endl;
             std::cout << " -d: root processing directory" << std::endl;
