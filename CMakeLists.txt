@@ -4,7 +4,7 @@ project(countLines)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-set(SOURCE countLines.cc Directory.cc Counter.cc)
+set(SOURCE countLines.cc Directory.cc Counter.cc File.cc)
 
 if(WIN32)
     set(SOURCE ${SOURCE} XGetopt.cpp)

@@ -3,14 +3,16 @@
 #include <Directory.h>
 #include <fstream>
 #include <iostream>
+#include <File.h>
 
 namespace Counter
 {
 
-void Counter::Init(const std::wstring &Regex, const std::wstring &Dir)
+void Counter::Init(const std::wstring &Regex, const std::wstring &Dir, const std::string &Text)
 {
     regex = std::wregex(Regex);
     dir = Dir;
+    text = Text;
 }
 
 void Counter::Process()
@@ -31,7 +33,19 @@ void Counter::ProcessFile(const std::wstring &Path)
     while (std::getline(file, line))
         linesInFile++;
 
-    std::wcout << linesInFile << L" lines." << std::endl;
+    std::wcout << linesInFile << L" lines. ";
+
+    if(text != ""){
+        File::Data content = File::Read(Path);
+
+        content.insert(content.begin(), text.begin(), text.end());
+
+        File::Rewrite(Path, content);
+
+        std::wcout << " custom text added. ";
+    }
+    
+    std::wcout << std::endl;
 
     linesCnt += linesInFile;
 }

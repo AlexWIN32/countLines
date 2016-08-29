@@ -11,11 +11,13 @@
 #include <codecvt>
 #include <Directory.h>
 #include <Counter.h>
+#include <File.h>
 
 int32_t main(int32_t argc, char *argv[ ])
 {
     std::wstring regex = L".*\\.(cc|cpp|h)";
     std::wstring dir = L".";
+    std::wstring textFileDir = L"";
 
     int32_t c;
 
@@ -26,17 +28,28 @@ int32_t main(int32_t argc, char *argv[ ])
             regex = converter.from_bytes(optarg);
         else if(c == 'd')
             dir = converter.from_bytes(optarg);
+        else if(c == 't')
+            textFileDir = converter.from_bytes(optarg);
         else if(c == '?' || c == 'h'){
             std::cout << "usage: countLines [-e regexp] [-d directory]" << std::endl;
             std::cout << " -e: file regular expression pattern" << std::endl;
             std::cout << " -d: root processing directory" << std::endl;
+            std::cout << " -t: text file dir. This text will placed at the beginning of each" << std::endl;
+            std::cout << "     file that matches regular expression" << std::endl;
         }
 
     Counter::Counter counter;
 
     try{
 
-        counter.Init(regex, dir);
+        std::string text;
+
+        if(textFileDir != L""){
+            File::Data data = File::Read(textFileDir);
+            std::for_each(data.begin(), data.end(), [&text](File::Data::value_type Value){text += Value;});
+        }
+
+        counter.Init(regex, dir, text);
         counter.Process();
 
     }catch(const std::regex_error &err){
