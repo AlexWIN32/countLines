@@ -15,7 +15,7 @@ private:
     void ProcessFile(const std::wstring &Path);
 public:
     int64_t GetLinesCount() const {return linesCnt;}
-    void Init(const std::wstring &Regex, std::wstring &Dir);
+    void Init(const std::wstring &Regex, const std::wstring &Dir);
     void Process();
 };
 

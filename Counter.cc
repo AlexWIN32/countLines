@@ -7,7 +7,7 @@
 namespace Counter
 {
 
-void Counter::Init(const std::wstring &Regex, std::wstring &Dir)
+void Counter::Init(const std::wstring &Regex, const std::wstring &Dir)
 {
     regex = std::wregex(Regex);
     dir = Dir;
