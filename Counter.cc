@@ -35,6 +35,8 @@ void Counter::ProcessFile(const std::wstring &Path)
 
     std::wcout << linesInFile << L" lines. ";
 
+    file.close();
+
     if(text != ""){
         File::Data content = File::Read(Path);
 
