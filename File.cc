@@ -43,7 +43,7 @@ static FILE * Open(const std::wstring &Path, const std::wstring &&Mode)
 
 Data&& Read(const std::wstring &Path)
 {
-    File::Guard file = Open(Path, L"r");
+    File::Guard file = Open(Path, L"rb");
 
     fseek(file.Get(), 0, SEEK_END);
 
@@ -55,8 +55,9 @@ Data&& Read(const std::wstring &Path)
         throw IOException(L"File is too big");
 
     Data data(size);
-    
-    if(fread(&data[0], sizeof(Data::size_type), size, file.Get()))
+
+    size_t rSize = fread(&data[0], sizeof(Data::value_type), size, file.Get());
+    if(rSize != size)
         throw IOException(L"Cant read from file");
 
     return std::move(data);
