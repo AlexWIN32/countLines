@@ -13,6 +13,17 @@
 #include <Counter.h>
 #include <File.h>
 
+static void PrintUsage()
+{
+    std::cout << "usage: countLines [-e regexp] [-d directory] [-t text]" << std::endl;
+    std::cout << " -e: file regular expression pattern" << std::endl;
+    std::cout << " -d: root processing directory" << std::endl;
+    std::cout << " -t: text file dir. This text will be placed at the beginning of each" << std::endl;
+    std::cout << "     file that matches regular expression" << std::endl;
+
+    exit(0);
+}
+
 int32_t main(int32_t argc, char *argv[ ])
 {
     std::wstring regex = L".*\\.(cc|cpp|h)";
@@ -30,12 +41,11 @@ int32_t main(int32_t argc, char *argv[ ])
             dir = converter.from_bytes(optarg);
         else if(c == 't')
             textFileDir = converter.from_bytes(optarg);
-        else if(c == '?' || c == 'h'){
-            std::cout << "usage: countLines [-e regexp] [-d directory] [-t text]" << std::endl;
-            std::cout << " -e: file regular expression pattern" << std::endl;
-            std::cout << " -d: root processing directory" << std::endl;
-            std::cout << " -t: text file dir. This text will be placed at the beginning of each" << std::endl;
-            std::cout << "     file that matches regular expression" << std::endl;
+        else if(c == '?' || c == 'h')
+            PrintUsage();
+        else {
+            std::cout << "invalid option " << c << std::endl;
+            PrintUsage();    
         }
 
     Counter::Counter counter;
