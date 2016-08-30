@@ -41,7 +41,7 @@ static FILE * Open(const std::wstring &Path, const std::wstring &&Mode)
     return outFile;
 }
 
-Data&& Read(const std::wstring &Path)
+Data Read(const std::wstring &Path)
 {
     File::Guard file = Open(Path, L"rb");
 
@@ -60,7 +60,7 @@ Data&& Read(const std::wstring &Path)
     if(rSize != size)
         throw IOException(L"Cant read from file");
 
-    return std::move(data);
+    return data;
 }
 
 void Rewrite(const std::wstring &Path, const Data &FileData)
