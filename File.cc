@@ -65,10 +65,11 @@ Data&& Read(const std::wstring &Path)
 
 void Rewrite(const std::wstring &Path, const Data &FileData)
 {
-    File::Guard file = Open(Path, L"w");
+    File::Guard file = Open(Path, L"wb");
 
-    if(fwrite(&FileData[0], sizeof(Data::size_type), FileData.size(), file.Get()))
-        throw IOException(L"Cant read from file");
+    size_t nWrite = fwrite(&FileData[0], sizeof(Data::value_type), FileData.size(), file.Get());
+    if(nWrite != FileData.size())
+        throw IOException(L"Cant write to file");
 }
 
 }
