@@ -23,7 +23,7 @@ int32_t main(int32_t argc, char *argv[ ])
 
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 
-    while ((c = getopt(argc, argv, "e:d:h")) != EOF)
+    while ((c = getopt(argc, argv, "e:d:t:h")) != EOF)
         if(c == 'e')
             regex = converter.from_bytes(optarg);
         else if(c == 'd')
@@ -31,7 +31,7 @@ int32_t main(int32_t argc, char *argv[ ])
         else if(c == 't')
             textFileDir = converter.from_bytes(optarg);
         else if(c == '?' || c == 'h'){
-            std::cout << "usage: countLines [-e regexp] [-d directory]" << std::endl;
+            std::cout << "usage: countLines [-e regexp] [-d directory] [-t text]" << std::endl;
             std::cout << " -e: file regular expression pattern" << std::endl;
             std::cout << " -d: root processing directory" << std::endl;
             std::cout << " -t: text file dir. This text will be placed at the beginning of each" << std::endl;
